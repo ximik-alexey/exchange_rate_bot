@@ -25,20 +25,18 @@ def send_welcome(message):
 def get_text_messages(message):
     try:
         if len(message.text.split()) == 2:
-            act, money = message.text.split()
-            act, money = act.lower(), money.upper()
-            if (act == 'sell' or act == 'buy') and (money == 'USD' or money == 'EUR' or money == 'RUB'):
-                bank, kurs, link = logic.sell_buy(act, money)
-                bot.send_message(message.from_user.id, f' {money}: {kurs} в банке {bank}, сайт {link}')
+            arg_1, arg_2 = message.text.split()
+            arg_1, arg_2 = arg_1.lower(), arg_2.upper()
+            if (arg_1 == 'sell' or arg_1 == 'buy') and (arg_2 == 'USD' or arg_2 == 'EUR' or arg_2 == 'RUB'):
+                bank, kurs, link = logic.sell_buy(arg_1, arg_2)
+                bot.send_message(message.from_user.id, f' {arg_2}: {kurs} в банке {bank}, сайт {link}')
             else:
                 send_welcome(message)
 
         elif len(message.text.split()) == 3:
             arg_1, arg_2, arg_3 = message.text.split()
             arg_1, arg_3 = arg_1.lower(), arg_3.upper()
-            if arg_2.isdigit():
-                pass
-            else:
+            if not arg_2.isdigit():
                 arg_2 = arg_2.lower()
             if (arg_1 == 'sell') \
                     and arg_2.isdigit() \
