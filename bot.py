@@ -10,7 +10,6 @@ import logic
 
 bot = telebot.TeleBot(config.TOKEN)
 
-
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     help_text = 'Для просмотра выгодной продажи валюты введите:\nsell USD или sell RUB или sell EUR\n\n' \
